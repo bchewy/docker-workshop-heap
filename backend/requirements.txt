@@ -4,3 +4,5 @@ sqlalchemy
 databases
 pymysql
 python-dotenv
+mysqlclient
+cryptography

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "published_date": "1960-07-11",
+    "description": "A novel about the serious issues of rape and racial inequality."
+  },
+  {
+    "id": 2,
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "published_date": "1949-06-08",
+    "description": "A novel that presents a terrifying vision of a global totalitarian regime."
+  },
+  {
+    "id": 3,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "published_date": "1925-04-10",
+    "description": "A novel about the American dream and the roaring twenties."
+  }
+]

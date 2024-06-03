@@ -1,0 +1,36 @@
+version: '3'
+networks:
+  frontend_backend_net:
+  backend_db_net:
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - frontend_backend_net
+      - backend_db_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - frontend_backend_net
+
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
+    networks:
+      - backend_db_net

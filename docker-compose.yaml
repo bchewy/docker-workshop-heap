@@ -10,11 +10,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8080
-    depends_on:
-      - db
     networks:
       - frontend_backend_net
       - backend_db_net
+    depends_on:
+      db:
+        condition: service_healthy
 
   frontend:
     build:
@@ -26,11 +27,16 @@ services:
       - frontend_backend_net
 
   db:
-    image: mariadb
+    image: mariadb:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=mypassword
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: booklibrary
+    ports:
+      - "3306:3306"
     networks:
       - backend_db_net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

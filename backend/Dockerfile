@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory in the container
 WORKDIR /app
 COPY . /app
-COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
-RUN chmod +x /usr/local/bin/wait-for-it.sh
 
 # Upgrade pip and install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
@@ -24,5 +22,4 @@ EXPOSE 8080
 
 # RUN chmod +x /usr/local/bin/wait-for-it.sh
 
-ENTRYPOINT ["/usr/local/bin/wait-for-it.sh", "db:3306", "--"]
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]

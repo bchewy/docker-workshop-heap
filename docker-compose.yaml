@@ -1,7 +1,7 @@
 version: '3'
 networks:
-  frontend_backend_net:
   backend_db_net:
+    driver: bridge
 
 services:
   backend:
@@ -11,7 +11,6 @@ services:
     ports:
       - 8080:8080
     networks:
-      - frontend_backend_net
       - backend_db_net
     depends_on:
       db:
@@ -23,20 +22,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    networks:
-      - frontend_backend_net
 
   db:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: booklibrary
-    ports:
-      - "3306:3306"
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: booklibrary
     networks:
       - backend_db_net
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      test: ["CMD-SHELL", "mariadb -h localhost -u root -ppassword -e 'SELECT 1'"]
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 5

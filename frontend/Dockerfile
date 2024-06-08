@@ -18,5 +18,8 @@ RUN npm run build
 # Expose the port that the application will run on
 EXPOSE 3000
 
+# Copy the .env.local file to the working directory
+# Ensure the environment variable is available during the build process
+
 # Start the application
-CMD ["npm", "start"]`
+CMD ["npm", "start"]
